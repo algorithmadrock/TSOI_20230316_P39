@@ -12,15 +12,14 @@ public class Ranking {
 	private static int posicao = 0;
 
 	public Ranking(String equipe, String nome, double recorde) {
-//		a cada vez que eu conro isso, preencho a posição e reordeno a lista
-		Ranking.recorde[posicao] = recorde;
-		Ranking.dados[0][posicao] = equipe;
-		Ranking.dados[1][posicao] = nome;
-
+//		por ser tudo por ordem de chegada, pode acontecer de duas threads iniciarem o mesmo processo simultâneamente, com a posição ao fim do código, os dados correm o risco de se sobrescrevrerem
 		posicao++;
+//		a cada vez que eu conro isso, preencho a posição e reordeno a lista
+		Ranking.recorde[posicao-1] = recorde;
+		Ranking.dados[0][posicao-1] = equipe;
+		Ranking.dados[1][posicao-1] = nome;
 		
-
-		if (posicao > 9) {
+		if (posicao == 10) {
 			ordenacao();
 			System.err.println("\nCLASSIFICACAO POR VELOCIDADE:");
 			for (int i = 0; i < 10; i++) {
@@ -28,7 +27,6 @@ public class Ranking {
 			}
 		}
 	}
-
 	private void ordenacao() {
 		subQUICK(0, 9);
 	}

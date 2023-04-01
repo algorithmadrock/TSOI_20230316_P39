@@ -8,34 +8,34 @@ package controller;
 
 import java.util.concurrent.Semaphore;
 
-public class Piloto extends Thread {
+public class Pilotos extends Thread {
 
-	private static Semaphore piloto = new Semaphore(1);
-	private String nome, equipe;
-	private double recorde;
 	
+	private String p1, p2, equipe;
+	private double recorde;
+	private Semaphore corredor = new Semaphore(1);
 
-	public Piloto(String equipe, String nome) {
-		this.nome = nome;
+	public Pilotos(String equipe, String p1, String p2) {
+		this.p1 = p1;
+		this.p2 = p2;
 		this.equipe = equipe;
 	}
 	@Override
 	public void run() {
-		try {
-			piloto.acquire();
-			System.err.println(nome + ", piloto da " + equipe + " entrou na pista.");
-			corrida();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} finally {
-			Ranking ranking = new Ranking(equipe, nome, recorde);	
-			piloto.release();
-		}
+			
+			System.err.println(p1 + ", piloto da " + equipe + " entrou na pista.");
+			corrida(p1);
+			
+			
+			System.err.println(p2 + ", piloto da " + equipe + " entrou na pista.");
+			corrida(p2);
+			
+	
 	}
 
-	private void corrida() {
+	private void corrida(String nome) {
 
-		for (int volta = 1; volta < 3; volta++) {
+		for (int volta = 1; volta <= 3; volta++) {
 			int correu = 0;
 
 			long inicio = System.nanoTime();
@@ -51,7 +51,7 @@ public class Piloto extends Thread {
 			System.out.println(nome + " da " + equipe + " : " + volta + "a. " + tempo + "ns.");
 
 		}
-		
+		new Ranking(equipe, nome, recorde);
 		
 	}
 

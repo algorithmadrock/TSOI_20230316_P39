@@ -22,15 +22,10 @@ public class Escuderia extends Thread {
 //		só inicializo as 5 competidoras
 		try {
 			competidoras.acquireUninterruptibly();
-
 			System.out.println(equipe + " entrou na corrida!");
-			
 //			só inicializo os pilotos se eles forrem correr
-			Thread carro1 = new Piloto(equipe, p1);
-			Thread carro2 = new Piloto(equipe, p2);
-			carro1.start();
-			carro2.start();
-			
+			Thread pilotos = new Pilotos(equipe, p1, p2);
+			pilotos.start();
 		} finally {
 			
 		}

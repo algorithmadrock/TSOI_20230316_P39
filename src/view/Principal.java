@@ -21,22 +21,15 @@ public class Principal {
 	}
 
 	private static void iniciar() {
-		Thread Mercedes = new Escuderia("Mercedes", "Lewis Hamilton", "George Russel");
-		Thread RBR = new Escuderia("RBR", "Max Verstappen", "Sergio Perez");
-		Thread Ferrari = new Escuderia("Ferrari", "Charles Leclerc", "Carlos Sainz");
-		Thread Alpine = new Escuderia("Alpine", "Esteban Ocon", "Pierre Gasly");
-		Thread AstonMartin = new Escuderia("Aston Martin", "Lance Stroll", "Fernando Alonso");
-		Thread AlphaTauri = new Escuderia("AlphaTauri", "Yuki Tsunoda", "Nyck de Vries");
-		Thread AlfaRomeo  = new Escuderia("Alfa Romeo", "Valtteri Bottas", "Guanyu Zhou");
-
-		Mercedes.start();
-		RBR.start();
-		Ferrari.start();
-		Alpine.start();
-		AstonMartin.start();
-		AlphaTauri.start();
-		AlfaRomeo.start();
-
+		
+		String[] equipes = {"Mercedes", "RBR", "Ferrari", "Alpine", "Aston Martin", "AlphaTauri", "Alfa Romeo"}; 
+		String[] p1 = {"Lewis Hamilton","Max Verstappen","Charles Leclerc","Esteban Ocon","Lance Stroll","Yuki Tsunoda","Valtteri Bottas"};
+		String[] p2 = {"George Russel", "Sergio Perez", "Carlos Sainz", "Pierre Gasly", "Fernando Alonso", "Nyck de Vries", "Guanyu Zhou"};
+		
+		for (int i = 0; i<7; i++) {
+			Thread escuderia = new Escuderia(equipes[i],p1[i], p2[i]);
+			escuderia.start();
+		}
 	}
 	
 
